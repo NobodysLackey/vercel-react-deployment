@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preload" href="./images/check.png" as="check" />
+    <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />
+    <script defer src="script.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <title>React Vercel Deployment</title>
+  </head>
+
+  <body>
+    <div style="display: none">
+      <img id="preload-check" src="./images/check.png" alt="check" />
+      <img id="preload-copy" src="./images/copy.png" alt="copy" />
+    </div>
+    <main>
+      <center>
+        <img src="./images/banner.png" alt="banner" class="banner" />
+
+        <p>
+          This website will walk you through the steps to deploy a
+          <a href="https://vitejs.dev/" target="_blank">Vite</a>
+          React app with <a href="https://vercel.com/" target="_blank">Vercel</a>.
+          We will walk through all of the necessary steps from start to finish,
+          and even cover how you can choose a custom domain as well.
+        </p>
+
+        <hr />
+      </center>
+
+      <h2>Objectives</h2>
+      <ul>
+        <li>
+          Learn how to do a one-time <a href="#installing-surge">install</a> of
+          Surge globally on your machine
+        </li>
+        <li>Set up Surge <a href="#environment">environment</a> variables</li>
+        <li>
+          Learn how to set up a custom domain (<a href="#custom-domain"
+            >optional</a
+          >)
+        </li>
+        <li>
+          Create a custom build script (<a href="#custom-build">optional</a>)
+        </li>
+      </ul>
+
+      <h2>Is a React App a Static Site?</h2>
+      <p>
+        When we use the term "static", we are referring to the fact that the
+        content of the website will not change unless the files are manually
+        updated. The site does <em>not</em> interact with a database or involve
+        any
+        <a href="https://en.wikipedia.org/wiki/Server-side" target="_blank"
+          >server-side processing</a
+        >. The site will simply display the same information to every user.
+        Typically, static sites are faster and more secure than dynamic sites.
+      </p>
+
+      <p>
+        Technically, a React front-end is considered a static site because it
+        serves pre-built files to the browser, and all necessary data is
+        included within the initial load, meaning it doesn't need to query a
+        database or server for every user request. The dynamic interactions are
+        handled through JavaScript (<a
+          href="https://en.wikipedia.org/wiki/Dynamic_web_page"
+          target="_blank"
+          >client-side</a
+        >) which manipulates the DOM elements directly in the browser, without
+        needing to fetch new pages or data from a server. This results in faster
+        load times and a smoother user experience.
+      </p>
+
+      <p>This also means that we can use Surge to deploy it!</p>
+
+      <p>
+        Surge specializes in deploying and hosting these types of sites, and as
+        a result, is extremely light-weight and fast. The feature we love the
+        most is that Surge is extremely <em>easy to use</em>.
+      </p>
+
+      <h2 id="installing-surge">Installing Surge</h2>
+      <p>
+        Surge is very easy to install as well. We will perform a global install
+        so that you will always have Surge available to deploy your projects.
+      </p>
+
+      <p>
+        <b><em>If you have never installed Surge before...</em></b>
+      </p>
+
+      <p>
+        Run the following command from <em>any working directory</em> in your
+        terminal:
+      </p>
+
+      <div class="shell shadow" id="install">
+        <div class="code">
+          <p>$</p>
+          <code>npm install --global surge</code>
+        </div>
+        <div class="copy">
+          <img src="./images/copy.png" alt="copy" />
+        </div>
+      </div>
+
+      <p>
+        Since it is global, this is an install you will only ever need to run
+        <em><b>once</b></em
+        >, not on a project-by-project basis.
+      </p>
+
+      <h2>Setting Up Your Surge Account</h2>
+      <p>
+        <b><em>If you have never signed up with Surge before...</em></b>
+      </p>
+
+      <p>In the root directory of your project, run the following command:</p>
+
+      <div class="shell shadow" id="surge-one">
+        <div class="code">
+          <p>$</p>
+          <code>surge</code>
+        </div>
+        <div class="copy">
+          <img src="./images/copy.png" alt="copy" />
+        </div>
+      </div>
+
+      <p>
+        You will be prompted to set up an account with Surge in your command
+        line. Go ahead and do so.
+      </p>
+
+      <p>
+        Next, you'll be asked to confirm the project path. If you are in the
+        root directory of your project, this should already be correct. Just
+        press <kbd class="shadow">enter</kbd> to continue.
+      </p>
+
+      <p>
+        You will be automatically assigned a silly (usually) randomly generated
+        domain name for your site. This is ok and we can change it later. Press
+        <kbd class="shadow">enter</kbd> to continue.
+      </p>
+
+      <img src="./images/surge.gif" alt="deploy" class="image gif shadow" />
+
+      <p>
+        This may or may not succeed. Don't worry. Either way, we are not done
+        yet.
+      </p>
+
+      <h3 id="environment">Setting up Surge Environment Variables</h3>
+      <p>
+        In your front-end .env file (<b>touch .env</b> if you don't have one),
+        add the following variables in <b>SCREAMING_SNAKE_CASE</b>:
+      </p>
+
+      <div class="shell shadow" id="env">
+        <div class="code" id="env-block">
+          <code>SURGE_LOGIN=</code>
+          <code>SURGE_TOKEN=</code>
+        </div>
+        <div class="copy">
+          <img src="./images/copy.png" alt="copy" />
+        </div>
+      </div>
+
+      <p>
+        <b>SURGE_LOGIN</b> will be the email you signed up for Surge with. No
+        spaces, no quotes.
+      </p>
+
+      <p>
+        In your terminal, run the following command to get your Surge Token:
+      </p>
+
+      <div class="shell shadow" id="token">
+        <div class="code">
+          <p>$</p>
+          <code>npx surge token</code>
+        </div>
+        <div class="copy">
+          <img src="./images/copy.png" alt="copy" />
+        </div>
+      </div>
+
+      <p>
+        Paste the returned token to the above environment variable. No spaces,
+        no quotes.
+      </p>
+
+      <p>
+        <em
+          >Make sure to add <b>.env</b> to your <b>.gitignore</b> file. Never
+          push sensitive information up to GitHub!</em
+        >
+      </p>
+
+      <h2>Building Your Production App</h2>
+
+      <p>
+        Now, you need to tell Vite to build a production version of your app. If
+        you intend on using a custom domain,
+        <a href="#custom-domain">skip ahead</a> to that section. If not, run the
+        following:
+      </p>
+
+      <div class="shell shadow" id="script-one">
+        <div class="code">
+          <p>$</p>
+          <code>vite build</code>
+        </div>
+        <div class="copy">
+          <img src="./images/copy.png" alt="copy" />
+        </div>
+      </div>
+
+      <p>
+        Running the <b>vite build</b> command creates a production build of our
+        React App contained in a <b>/dist</b> folder. Surge will use this to
+        deploy our app.
+      </p>
+
+      <h2>Deploy</h2>
+      <p>
+        Once this completes, you're ready to deploy with Surge. Run the
+        following command:
+      </p>
+
+      <div class="shell shadow" id="script-two">
+        <div class="code">
+          <p>$</p>
+          <code>npx surge --project ./dist</code>
+        </div>
+        <div class="copy">
+          <img src="./images/copy.png" alt="copy" />
+        </div>
+      </div>
+
+      <p>
+        Wait for this to complete. It shouldn't take long. Take note of the
+        domain that Surge selects for you (usually something silly), then
+        navigate to that URL in your browser to see the result! Congratulations,
+        you're deployed!
+      </p>
+
+      <h2 id="custom-domain">Setting Up a Custom Domain (optional)</h2>
+      <p>
+        We can set up a file in your project that will remember the particular
+        domain you want to use. This step is entirely optional.
+      </p>
+
+      <h3>Choose a Domain</h3>
+      <p>
+        First, we'll need to see that the URL you want to use is available. Open
+        a browser window and navigate to any surge domain you'd like.
+      </p>
+
+      <p>The URL should follow this format:</p>
+
+      <div class="browser shadow">
+        <code> https://reactdeployment.surge.sh/ </code>
+      </div>
+
+      <p>If it's available, the URL should show this in the browser:</p>
+
+      <img src="./images/not-found.png" alt="not-found" class="image shadow" />
+
+      <p>
+        This means that no one else has deployed a project to this URL, and that
+        it is available to be used. Remember this URL for the next step.
+      </p>
+
+      <h3 id="custom-build">Creating A Custom Build Script</h3>
+
+      <p>
+        Next, we'll create a "build" script in our <b>package.json</b> that will
+        perform all of the steps we need to run our deployment.
+      </p>
+
+      <p>
+        Add the following script <b><em>in</em></b> your
+        <b>"scripts"</b> section of your <b>package.json</b> file.
+      </p>
+
+      <p>If you already have a "build" script, replace it with this:</p>
+
+      <div class="shell shadow" id="script-three">
+        <div class="code">
+          <code
+            >"build": "vite build && npx surge --project ./dist --domain
+            &lt;SURGE_URL_IN_SINGLE_QUOTES&gt;"</code
+          >
+        </div>
+        <div class="copy">
+          <img src="./images/copy.png" alt="copy" />
+        </div>
+      </div>
+
+      <p>
+        Obviously replace the <b> <> </b> in the above script with your own
+        information. Pay close attention to the URL in the script above.
+        <em><b>It should be in single quotes</b></em
+        >.
+      </p>
+
+      <p>
+        Your <em><b>Surge URL</b></em> is what will be used as the entry point
+        to your app. This is what people will see, and the one you'll want to
+        put on your portfolio, LinkedIn, etc.
+      </p>
+
+      <p>This script performs the following actions:</p>
+
+      <ol>
+        <li>
+          Runs the <em>vite build</em> command that creates a production build
+          of our React App contained in a <b>/dist</b> folder
+        </li>
+        <li>
+          Runs the <em>surge</em> command to redeploy our app. To ensure it runs
+          automatically without needing any input from us, the project directory
+          and domain options are predefined.
+        </li>
+      </ol>
+
+      <h2>Deploy</h2>
+
+      <p>
+        Any time you want to deploy, run the custom script you put in your
+        <b>package.json</b> file. Do so from the root of your project:
+      </p>
+
+      <div class="shell shadow" id="build">
+        <div class="code">
+          <p>$</p>
+          <code>npm run build</code>
+        </div>
+        <div class="copy">
+          <img src="./images/copy.png" alt="copy" />
+        </div>
+      </div>
+
+      <p>This will run the deployment of our Vite React App to Surge.</p>
+
+      <h2>Recap</h2>
+      <p>
+        In this walkthrough, you successfully deployed your Vite React app to
+        Surge.
+      </p>
+
+      <p>
+        Any time you make changes to your project that you want reflected on
+        your deployed version, just commit your changes and then run
+        <b>npm run build</b> once more.
+      </p>
+
+      <h2>Resources</h2>
+      <ul>
+        <li>
+          <a href="https://vitejs.dev/guide/" target="_blank">Vite Docs</a>
+        </li>
+        <li>
+          <a
+            href="https://surge.sh/help/getting-started-with-surge"
+            target="_blank"
+            >Surge Docs</a
+          >
+        </li>
+        <li>
+          <a
+            href="https://deployit.surge.sh/"
+            target="_blank"
+            >Deploy It!</a
+          >
+        </li>
+      </ul>
+      <br />
+      <center>
+        <div class="logos">
+          <a href="https://react.dev/" target="_blank">
+            <img src="./images/react.png" alt="react" id="react" />
+          </a>
+          <a href="https://surge.sh" target="_blank">
+            <img src="./images/surge.png" alt="surge" id="surge" />
+          </a>
+          <a href="https://vitejs.dev/" target="_blank">
+            <img src="./images/vite.png" alt="vite" id="vite" />
+          </a>
+        </div>
+      </center>
+    </main>
+  </body>
+</html>
