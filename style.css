@@ -4,7 +4,7 @@
   --main: #3a3a3a;
   --hover: #656565;
   --highlight: #000000;
-  --highlight-two: #262626;
+  --highlight-two: #6a6a6a;
   --background: #e6e6e6;
 }
 
@@ -118,7 +118,6 @@ hr {
 
 #script-three {
   display: flex;
-  align-items: center;
 }
 
 #script-three div {
