@@ -22,9 +22,10 @@
         <p>
           This website will walk you through the steps to deploy a
           <a href="https://vitejs.dev/" target="_blank">Vite</a>
-          React app with <a href="https://vercel.com/" target="_blank">Vercel</a>.
-          We will walk through all of the necessary steps from start to finish,
-          and even cover how you can choose a custom domain as well.
+          React app with
+          <a href="https://vercel.com/" target="_blank">Vercel</a>. We will walk
+          through all of the necessary steps from start to finish, and even
+          cover how you can choose a custom domain as well.
         </p>
 
         <hr />
@@ -33,10 +34,10 @@
       <h2>Objectives</h2>
       <ul>
         <li>
-          Learn how to do a one-time <a href="#installing-surge">install</a> of
-          Surge globally on your machine
+          Do a one-time <a href="#log-in-to-vercel">login</a> to Vercel on your
+          machine
         </li>
-        <li>Set up Surge <a href="#environment">environment</a> variables</li>
+        <li><a href="#deploy">Deploy</a> your app to Vercel</li>
         <li>
           Learn how to set up a custom domain (<a href="#custom-domain"
             >optional</a
@@ -73,22 +74,33 @@
         load times and a smoother user experience.
       </p>
 
-      <p>This also means that we can use Surge to deploy it!</p>
+      <p>This also means that we can use Vercel to deploy it!</p>
 
       <p>
-        Surge specializes in deploying and hosting these types of sites, and as
+        Vercel specializes in deploying and hosting these types of sites, and as
         a result, is extremely light-weight and fast. The feature we love the
-        most is that Surge is extremely <em>easy to use</em>.
+        most is that Vercel is extremely <em>easy to use</em>.
       </p>
 
-      <h2 id="installing-surge">Installing Surge</h2>
+      <h2 id="log-in-to-vercel">Log In to Vercel</h2>
       <p>
-        Surge is very easy to install as well. We will perform a global install
-        so that you will always have Surge available to deploy your projects.
+        First off, we need to do a one-time login to Vercel on our machine. This
+        should only need to be done once.
+      </p>
+
+      <h3>Setting Up Your Vercel Account</h3>
+
+      <p>
+        <b><em>If you have never signed up with Vercel before...</em></b>
       </p>
 
       <p>
-        <b><em>If you have never installed Surge before...</em></b>
+        Visit <a href="https://vercel.com/signup">Vercel</a> to sign up for a
+        new account.
+      </p>
+
+      <p>
+        <b><em>After signing up...</em></b>
       </p>
 
       <p>
@@ -96,10 +108,10 @@
         terminal:
       </p>
 
-      <div class="shell shadow" id="install">
+      <div class="shell shadow" id="login">
         <div class="code">
           <p>$</p>
-          <code>npm install --global surge</code>
+          <code>npx vercel login</code>
         </div>
         <div class="copy">
           <img src="./images/copy.png" alt="copy" />
@@ -107,100 +119,11 @@
       </div>
 
       <p>
-        Since it is global, this is an install you will only ever need to run
-        <em><b>once</b></em
-        >, not on a project-by-project basis.
+        You will be prompted to press <kbd class="shadow">enter</kbd> to open up
+        a browser to sign in to your Vercel account.
       </p>
 
-      <h2>Setting Up Your Surge Account</h2>
-      <p>
-        <b><em>If you have never signed up with Surge before...</em></b>
-      </p>
-
-      <p>In the root directory of your project, run the following command:</p>
-
-      <div class="shell shadow" id="surge-one">
-        <div class="code">
-          <p>$</p>
-          <code>surge</code>
-        </div>
-        <div class="copy">
-          <img src="./images/copy.png" alt="copy" />
-        </div>
-      </div>
-
-      <p>
-        You will be prompted to set up an account with Surge in your command
-        line. Go ahead and do so.
-      </p>
-
-      <p>
-        Next, you'll be asked to confirm the project path. If you are in the
-        root directory of your project, this should already be correct. Just
-        press <kbd class="shadow">enter</kbd> to continue.
-      </p>
-
-      <p>
-        You will be automatically assigned a silly (usually) randomly generated
-        domain name for your site. This is ok and we can change it later. Press
-        <kbd class="shadow">enter</kbd> to continue.
-      </p>
-
-      <img src="./images/surge.gif" alt="deploy" class="image gif shadow" />
-
-      <p>
-        This may or may not succeed. Don't worry. Either way, we are not done
-        yet.
-      </p>
-
-      <h3 id="environment">Setting up Surge Environment Variables</h3>
-      <p>
-        In your front-end .env file (<b>touch .env</b> if you don't have one),
-        add the following variables in <b>SCREAMING_SNAKE_CASE</b>:
-      </p>
-
-      <div class="shell shadow" id="env">
-        <div class="code" id="env-block">
-          <code>SURGE_LOGIN=</code>
-          <code>SURGE_TOKEN=</code>
-        </div>
-        <div class="copy">
-          <img src="./images/copy.png" alt="copy" />
-        </div>
-      </div>
-
-      <p>
-        <b>SURGE_LOGIN</b> will be the email you signed up for Surge with. No
-        spaces, no quotes.
-      </p>
-
-      <p>
-        In your terminal, run the following command to get your Surge Token:
-      </p>
-
-      <div class="shell shadow" id="token">
-        <div class="code">
-          <p>$</p>
-          <code>npx surge token</code>
-        </div>
-        <div class="copy">
-          <img src="./images/copy.png" alt="copy" />
-        </div>
-      </div>
-
-      <p>
-        Paste the returned token to the above environment variable. No spaces,
-        no quotes.
-      </p>
-
-      <p>
-        <em
-          >Make sure to add <b>.env</b> to your <b>.gitignore</b> file. Never
-          push sensitive information up to GitHub!</em
-        >
-      </p>
-
-      <h2>Building Your Production App</h2>
+      <h2>Vite Build</h2>
 
       <p>
         Now, you need to tell Vite to build a production version of your app. If
@@ -221,37 +144,57 @@
 
       <p>
         Running the <b>vite build</b> command creates a production build of our
-        React App contained in a <b>/dist</b> folder. Surge will use this to
+        React App contained in a <b>/dist</b> folder. Vercel will use this to
         deploy our app.
       </p>
 
-      <h2>Deploy</h2>
+      <h2 id="deploy">Deploy</h2>
+
       <p>
-        Once this completes, you're ready to deploy with Surge. Run the
-        following command:
+        You'll need to create a JSON file in the root of your project to tell
+        Vercel how to work with Vite.
       </p>
 
       <div class="shell shadow" id="script-two">
         <div class="code">
           <p>$</p>
-          <code>npx surge --project ./dist</code>
+          <code>touch vercel.json</code>
         </div>
         <div class="copy">
           <img src="./images/copy.png" alt="copy" />
         </div>
       </div>
 
+      <p>In this file, paste in the following settings:</p>
+
+      <div class="code-block shadow" id="script-three">
+        <pre>{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+}</pre>
+        <div class="copy">
+          <img src="./images/copy.png" alt="copy" />
+        </div>
+      </div>
+
       <p>
-        Wait for this to complete. It shouldn't take long. Take note of the
-        domain that Surge selects for you (usually something silly), then
-        navigate to that URL in your browser to see the result! Congratulations,
-        you're deployed!
+        Now, you're ready to deploy. Run the following command in the root folder of your project:
       </p>
+
+       <div class="shell shadow" id="script-four">
+        <div class="code">
+          <p>$</p>
+          <code>npx vercel --prod --yes</code>
+        </div>
+        <div class="copy">
+          <img src="./images/copy.png" alt="copy" />
+        </div>
+      </div>
 
       <h2 id="custom-domain">Setting Up a Custom Domain (optional)</h2>
       <p>
-        We can set up a file in your project that will remember the particular
-        domain you want to use. This step is entirely optional.
+        We can choose the particular domain you want to use with Vercel. This step is entirely optional.
       </p>
 
       <h3>Choose a Domain</h3>
@@ -263,12 +206,12 @@
       <p>The URL should follow this format:</p>
 
       <div class="browser shadow">
-        <code> https://reactdeployment.surge.sh/ </code>
+        <code> https://vercelreactdeployment.vercel.app/ </code>
       </div>
 
-      <p>If it's available, the URL should show this in the browser:</p>
+      <p>If it's available, the URL should show this or something very similar in the browser:</p>
 
-      <img src="./images/not-found.png" alt="not-found" class="image shadow" />
+      <img src="./images/not-found.png" alt="not-found" class="image shadow" id="not-found"/>
 
       <p>
         This means that no one else has deployed a project to this URL, and that
@@ -289,11 +232,10 @@
 
       <p>If you already have a "build" script, replace it with this:</p>
 
-      <div class="shell shadow" id="script-three">
+      <div class="shell shadow" id="build-one">
         <div class="code">
           <code
-            >"build": "vite build && npx surge --project ./dist --domain
-            &lt;SURGE_URL_IN_SINGLE_QUOTES&gt;"</code
+            >"build": "vite build && npx vercel --prod --yes --name <VERCEL_URL>"</code
           >
         </div>
         <div class="copy">
@@ -303,13 +245,11 @@
 
       <p>
         Obviously replace the <b> <> </b> in the above script with your own
-        information. Pay close attention to the URL in the script above.
-        <em><b>It should be in single quotes</b></em
-        >.
+        information.
       </p>
 
       <p>
-        Your <em><b>Surge URL</b></em> is what will be used as the entry point
+        Your <em><b>Vercel URL</b></em> is what will be used as the entry point
         to your app. This is what people will see, and the one you'll want to
         put on your portfolio, LinkedIn, etc.
       </p>
@@ -319,23 +259,21 @@
       <ol>
         <li>
           Runs the <em>vite build</em> command that creates a production build
-          of our React App contained in a <b>/dist</b> folder
+          of your React App contained in a <b>/dist</b> folder
         </li>
         <li>
-          Runs the <em>surge</em> command to redeploy our app. To ensure it runs
-          automatically without needing any input from us, the project directory
-          and domain options are predefined.
+          Runs the <em>vercel</em> command to redeploy your app - pointing to your chosen domain
         </li>
       </ol>
 
-      <h2>Deploy</h2>
+      <h2>Re-Deploy</h2>
 
       <p>
         Any time you want to deploy, run the custom script you put in your
         <b>package.json</b> file. Do so from the root of your project:
       </p>
 
-      <div class="shell shadow" id="build">
+      <div class="shell shadow" id="build-two">
         <div class="code">
           <p>$</p>
           <code>npm run build</code>
@@ -345,12 +283,12 @@
         </div>
       </div>
 
-      <p>This will run the deployment of our Vite React App to Surge.</p>
+      <p>This will run the deployment of our Vite React App to Vercel.</p>
 
       <h2>Recap</h2>
       <p>
         In this walkthrough, you successfully deployed your Vite React app to
-        Surge.
+        Vercel.
       </p>
 
       <p>
@@ -366,17 +304,13 @@
         </li>
         <li>
           <a
-            href="https://surge.sh/help/getting-started-with-surge"
+            href="https://vercel.com/docs"
             target="_blank"
-            >Surge Docs</a
+            >Vercel Docs</a
           >
         </li>
         <li>
-          <a
-            href="https://deployit.surge.sh/"
-            target="_blank"
-            >Deploy It!</a
-          >
+          <a href="https://deployit.surge.sh/" target="_blank">Deploy It!</a>
         </li>
       </ul>
       <br />
@@ -385,8 +319,8 @@
           <a href="https://react.dev/" target="_blank">
             <img src="./images/react.png" alt="react" id="react" />
           </a>
-          <a href="https://surge.sh" target="_blank">
-            <img src="./images/surge.png" alt="surge" id="surge" />
+          <a href="https://vercel.com" target="_blank">
+            <img src="./images/vercel.png" alt="vercel" id="vercel" />
           </a>
           <a href="https://vitejs.dev/" target="_blank">
             <img src="./images/vite.png" alt="vite" id="vite" />

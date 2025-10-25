@@ -1,4 +1,4 @@
-let elements = ['install', 'surge-one', 'env', 'token', 'script-one', 'script-two', 'script-three', 'build']
+let elements = ['login', 'script-one', 'script-two', 'script-three', 'script-four', 'build-one', 'build-two']
 let copied = false
 let out = true
 
@@ -10,8 +10,8 @@ const copy = (element) => {
   let boxHidden = shell.querySelector('.copy')
   let boxImg = shell.querySelector('img')
 
-  if (shell.querySelector('code').innerText === 'SURGE_LOGIN=') {
-    navigator.clipboard.writeText('SURGE_LOGIN=\nSURGE_TOKEN=')
+  if (element === "script-three") {
+    navigator.clipboard.writeText(shell.querySelector('pre').innerText)
   } else {
     navigator.clipboard.writeText(shell.querySelector('code').innerText)
   }

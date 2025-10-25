@@ -3,8 +3,8 @@
 :root {
   --main: #3a3a3a;
   --hover: #656565;
-  --highlight: #2e7254;
-  --highlight-two: #63c199;
+  --highlight: #000000;
+  --highlight-two: #262626;
   --background: #e6e6e6;
 }
 
@@ -21,6 +21,21 @@ body {
   align-items: center;
 }
 
+kbd {
+  background-color: #fbf3ed;
+  padding: 4px;
+  border: 1px solid var(--main);
+  border-radius: 3px;
+  color: var(--main);
+  font-weight: bold;
+}
+
+kbd:hover {
+  background-color: var(--main);
+  color: #fbf3ed;
+  cursor: default;
+}
+
 main {
   width: 95vw;
   margin: 2vh 2vw;
@@ -29,6 +44,7 @@ main {
 a {
   text-decoration: none;
   color: var(--highlight);
+  font-weight: 500;
 }
 
 a:hover {
@@ -92,15 +108,60 @@ hr {
   flex-direction: column;
 }
 
+#build-one {
+  width: fit-content;
+}
+
+#build-one div code {
+  padding-right: 10px;
+}
+
 #script-three {
-  width: max-content;
+  display: flex;
+  align-items: center;
+}
+
+#script-three div {
+  height: fit-content;
+}
+
+#not-found {
+  max-width: 50%;
+}
+
+.code-block {
+  max-width: max-content;
+  background-color: var(--main);
+  color: #f7e3d6;
+  border: 2px solid #f7e3d6;
+  border-radius: 5px;
+  padding: 10px;
+  display: flex;
+}
+
+.code-block pre {
+  margin: 8px 0 0 0;
+  padding: 0 10px 0 0;
+}
+
+.script code {
+  padding: 0 10px 0 0;
+}
+
+pre {
+  font-family: monospace;
+  white-space: pre-wrap;
+  overflow-x: auto;
+  background-color: var(--main);
+  /* margin: 0; */
+  color: inherit;
 }
 
 .code > p {
   display: inline;
   font-family: monospace;
   margin-right: 4px;
-  color: var(--highlight-two);
+  color: white;
   cursor: default;
 }
 
@@ -148,7 +209,7 @@ hr {
   max-width: 20vw;
 }
 
-#surge {
+#vercel {
   max-width: 20vw;
 }
 
